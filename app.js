@@ -44,7 +44,14 @@ $("#newUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") addBoat
 async function deleteBoat(url) {
   if (!confirm("Slette denne båten?")) return;
   if (!requirePat()) return;
+
+  // Optimistisk oppdatering: fjern fra in-memory og render UMIDDELBART
+  // så brukeren ser resultatet. Hvis commit feiler, ruller vi tilbake.
+  const backupBoats = boats.slice();
+  boats = boats.filter(b => (b.url || "").trim() !== url);
+  render();
   showStatus("Sletter…", false);
+
   try {
     const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
     if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
@@ -53,7 +60,8 @@ async function deleteBoat(url) {
     const before = currentContent.boats.length;
     currentContent.boats = (currentContent.boats || []).filter(b => (b.url || "").trim() !== url);
     if (currentContent.boats.length === before) {
-      showStatus("Fant ikke båten i lista.", true);
+      // Var allerede borte — ingen commit nødvendig
+      showStatus("Slettet.", false);
       return;
     }
     const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
@@ -65,9 +73,11 @@ async function deleteBoat(url) {
       throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
     }
     showStatus("Slettet.", false);
-    await loadBoats();
   } catch (err) {
-    showStatus("Feil: " + err.message, true);
+    // Rollback UI
+    boats = backupBoats;
+    render();
+    showStatus("Feil ved sletting — rullet tilbake: " + err.message, true);
   }
 }
 
@@ -77,7 +87,21 @@ async function addBoat() {
   try { new URL(url); } catch { showStatus("Ikke en gyldig URL.", true); return; }
   if (!requirePat()) return;
 
-  showStatus("Legger til…", false);
+  // Duplikat-sjekk i in-memory først
+  if (boats.some(b => (b.url || "").trim() === url)) {
+    showStatus("Denne URL-en er allerede lagt til.", true);
+    return;
+  }
+
+  // Optimistisk placeholder — vis kortet UMIDDELBART så brukeren ser at
+  // båten er lagt til (ikke må vente på commit + workflow).
+  const now = new Date().toISOString();
+  const placeholder = { url, addedAt: now, history: [{ at: now, type: "added" }], _pending: true };
+  const backupBoats = boats.slice();
+  boats = [placeholder, ...boats];
+  $("#newUrl").value = "";
+  render();
+  showStatus("Lagt til. Henter detaljer (~1–2 min)…", false);
   $("#addBtn").disabled = true;
 
   try {
@@ -87,28 +111,25 @@ async function addBoat() {
     const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
     if (!currentContent.boats) currentContent.boats = [];
     if (currentContent.boats.some(b => (b.url || "").trim() === url)) {
-      showStatus("Denne URL-en er allerede lagt til.", true);
+      // Allerede på serveren (race condition) — greit, la placeholder stå
       return;
     }
     currentContent.boats.push({ url });
     const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
     const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
       method: "PUT",
-      body: {
-        message: `Add boat: ${url}`,
-        content: encoded,
-        sha: meta.sha,
-        branch: "main",
-      },
+      body: { message: `Add boat: ${url}`, content: encoded, sha: meta.sha, branch: "main" },
     });
     if (put.status !== 200 && put.status !== 201) {
       throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
     }
-    $("#newUrl").value = "";
-    showStatus("Lagt til. Detaljer hentes ved neste kjøring (07:00) — eller trigg workflowen manuelt på GitHub.", false);
-    await loadBoats();
+    // Planlegg re-fetch etter workflow har rukket å berike (~90 sek)
+    setTimeout(() => { loadBoats(); }, 90000);
   } catch (err) {
-    showStatus("Feil: " + err.message, true);
+    // Rollback UI
+    boats = backupBoats;
+    render();
+    showStatus("Feil ved lagring — rullet tilbake: " + err.message, true);
   } finally {
     $("#addBtn").disabled = false;
   }
