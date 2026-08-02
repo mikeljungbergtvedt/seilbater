@@ -1,8 +1,116 @@
-// Frontend for Seilbåter — leser boats.json og viser båtene sortert/filtrert.
+// Frontend for Seilbåter — leser boats.json, lar bruker legge til båter via GitHub API.
+
+const REPO_OWNER = "mikeljungbergtvedt";
+const REPO_NAME = "seilbater";
+const FILE_PATH = "boats.json";
 
 const $ = (s) => document.querySelector(s);
 let boats = [];
 
+/* ---------- PAT-håndtering ---------- */
+function getPat() { return localStorage.getItem("gh_pat"); }
+function setPat(v) { localStorage.setItem("gh_pat", v); }
+function requirePat() {
+  if (getPat()) return true;
+  $("#patModal").classList.add("open");
+  setTimeout(() => $("#patInput").focus(), 50);
+  return false;
+}
+
+$("#patSave").addEventListener("click", () => {
+  const v = $("#patInput").value.trim();
+  if (!v.startsWith("github_pat_") && !v.startsWith("ghp_")) {
+    alert("Det ser ikke ut som et gyldig GitHub token (skal starte med github_pat_ eller ghp_).");
+    return;
+  }
+  setPat(v);
+  $("#patModal").classList.remove("open");
+  $("#patInput").value = "";
+});
+
+/* ---------- Legg til båt ---------- */
+$("#addBtn").addEventListener("click", async () => {
+  const url = $("#newUrl").value.trim();
+  if (!url) return;
+  try { new URL(url); } catch { setStatus("Ikke en gyldig URL.", true); return; }
+  if (!requirePat()) return;
+
+  setStatus("Legger til…", false);
+  $("#addBtn").disabled = true;
+
+  try {
+    // Hent nåværende boats.json med sha
+    const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
+    if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
+    const meta = current.data;
+    const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
+    if (!currentContent.boats) currentContent.boats = [];
+
+    // Sjekk duplikat
+    if (currentContent.boats.some(b => (b.url || "").trim() === url)) {
+      setStatus("Denne URL-en er allerede lagt til.", true);
+      return;
+    }
+
+    currentContent.boats.push({ url });
+    const newContent = JSON.stringify(currentContent, null, 2) + "\n";
+    const encoded = base64Encode(newContent);
+
+    const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+      method: "PUT",
+      body: {
+        message: `Add boat: ${url}`,
+        content: encoded,
+        sha: meta.sha,
+        branch: "main",
+      },
+    });
+    if (put.status !== 200 && put.status !== 201) {
+      throw new Error(`Kunne ikke commite (${put.status}): ${put.data?.message || "ukjent feil"}`);
+    }
+
+    $("#newUrl").value = "";
+    setStatus("Lagt til. Trigg workflow manuelt hvis du vil ha den beriket nå — ellers skjer det ved neste 07:00-kjøring.", false);
+    await loadBoats();
+  } catch (err) {
+    setStatus("Feil: " + err.message, true);
+  } finally {
+    $("#addBtn").disabled = false;
+  }
+});
+
+$("#newUrl").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") $("#addBtn").click();
+});
+
+function setStatus(msg, isError) {
+  const el = $("#addStatus");
+  el.textContent = msg;
+  el.className = "add-status" + (isError ? " error" : " ok");
+}
+
+async function ghFetch(path, opts = {}) {
+  const res = await fetch("https://api.github.com" + path, {
+    method: opts.method || "GET",
+    headers: {
+      Authorization: "Bearer " + getPat(),
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      ...(opts.body ? { "Content-Type": "application/json" } : {}),
+    },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  let data = null;
+  try { data = await res.json(); } catch {}
+  return { status: res.status, data };
+}
+
+function base64Encode(str) {
+  // UTF-8-safe base64
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+/* ---------- Vis lista ---------- */
 async function loadBoats() {
   $("#loading").textContent = "Laster…";
   $("#loading").style.display = "";
