@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:24:46.015Z",
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
       "price": 60000,
       "status": "active"
     },
@@ -38,20 +38,99 @@
         }
       ],
       "parseFailed": true,
-      "lastCheckedAt": "2026-08-02T12:24:46.015Z",
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
       "lastError": "HTTP 403"
     },
     {
-      "url": "https://www.finn.no/mobility/item/471722940"
+      "url": "https://www.finn.no/mobility/item/471722940",
+      "id": "b_q5xa10b9",
+      "addedAt": "2026-08-02T12:26:31.446Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:26:31.446Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Maxi Fenix Dinett 711",
+      "currency": "NOK",
+      "adLastUpdated": "2026-08-02T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/471722940/8f68cfb6-0bae-4c7f-be25-b4933a8c399a",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
+      "price": 125000,
+      "status": "active"
     },
     {
-      "url": "https://www.blocket.se/recommerce/forsale/item/25297294"
+      "url": "https://www.blocket.se/recommerce/forsale/item/25297294",
+      "id": "b_n3m18v5n",
+      "addedAt": "2026-08-02T12:26:31.446Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:26:31.446Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
+      "currency": "SEK",
+      "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "jsonld"
+      },
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
+      "price": 20000,
+      "status": "active"
     },
     {
-      "url": "https://www.blocket.se/recommerce/forsale/item/25323452"
+      "url": "https://www.blocket.se/recommerce/forsale/item/25323452",
+      "id": "b_v70mp6g5",
+      "addedAt": "2026-08-02T12:26:31.446Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:26:31.446Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Ratt, hopfällbar, till segelbåt",
+      "currency": "SEK",
+      "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "jsonld"
+      },
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
+      "price": 1000,
+      "status": "active"
     },
     {
-      "url": "https://www.yachtworld.com/yacht/2010-hanse-545-10063102/"
+      "url": "https://www.yachtworld.com/yacht/2010-hanse-545-10063102/",
+      "id": "b_yv5qm337",
+      "addedAt": "2026-08-02T12:26:31.446Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:26:31.446Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T12:26:31.446Z",
+      "lastError": "HTTP 403"
     }
   ]
 }
