@@ -1,16 +1,15 @@
 {
   "name": "seilbater",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Daglig overvåkning av seilbåt-annonser — pris og status.",
-  "scripts": {
-    "check": "node scripts/check.mjs"
-  },
+  "description": "Sailboat classifieds tracker",
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "@sparticuz/chromium": "^131.0.1",
     "cheerio": "^1.0.0",
     "nodemailer": "^6.9.16",
-    "playwright": "^1.48.0",
+    "playwright-core": "^1.48.0",
     "undici": "^6.21.0"
   },
   "engines": {
