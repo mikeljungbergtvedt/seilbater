@@ -1,61 +1,67 @@
-// Frontend for Seilbåter — leser boats.json, lar bruker legge til båter via GitHub API.
+// Frontend for Seilbåter — marketplace-stil.
 
 const REPO_OWNER = "mikeljungbergtvedt";
 const REPO_NAME = "seilbater";
 const FILE_PATH = "boats.json";
-
 const $ = (s) => document.querySelector(s);
+
 let boats = [];
 
-/* ---------- PAT-håndtering ---------- */
+/* ---------- PAT ---------- */
 function getPat() { return localStorage.getItem("gh_pat"); }
 function setPat(v) { localStorage.setItem("gh_pat", v); }
 function requirePat() {
   if (getPat()) return true;
-  $("#patModal").classList.add("open");
-  setTimeout(() => $("#patInput").focus(), 50);
+  openModal();
   return false;
 }
-
+function openModal() {
+  $("#patModal").classList.add("open");
+  setTimeout(() => $("#patInput").focus(), 50);
+}
+function closeModal() {
+  $("#patModal").classList.remove("open");
+  $("#patInput").value = "";
+}
+$("#patCancel").addEventListener("click", closeModal);
 $("#patSave").addEventListener("click", () => {
   const v = $("#patInput").value.trim();
   if (!v.startsWith("github_pat_") && !v.startsWith("ghp_")) {
-    alert("Det ser ikke ut som et gyldig GitHub token (skal starte med github_pat_ eller ghp_).");
+    alert("Ugyldig token — skal starte med github_pat_ eller ghp_");
     return;
   }
   setPat(v);
-  $("#patModal").classList.remove("open");
-  $("#patInput").value = "";
+  closeModal();
+});
+$("#patModal").addEventListener("click", (e) => {
+  if (e.target === $("#patModal")) closeModal();
 });
 
-/* ---------- Legg til båt ---------- */
-$("#addBtn").addEventListener("click", async () => {
+/* ---------- Add ---------- */
+$("#addBtn").addEventListener("click", addBoat);
+$("#newUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") addBoat(); });
+
+async function addBoat() {
   const url = $("#newUrl").value.trim();
   if (!url) return;
-  try { new URL(url); } catch { setStatus("Ikke en gyldig URL.", true); return; }
+  try { new URL(url); } catch { showStatus("Ikke en gyldig URL.", true); return; }
   if (!requirePat()) return;
 
-  setStatus("Legger til…", false);
+  showStatus("Legger til…", false);
   $("#addBtn").disabled = true;
 
   try {
-    // Hent nåværende boats.json med sha
     const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
     if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
     const meta = current.data;
     const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
     if (!currentContent.boats) currentContent.boats = [];
-
-    // Sjekk duplikat
     if (currentContent.boats.some(b => (b.url || "").trim() === url)) {
-      setStatus("Denne URL-en er allerede lagt til.", true);
+      showStatus("Denne URL-en er allerede lagt til.", true);
       return;
     }
-
     currentContent.boats.push({ url });
-    const newContent = JSON.stringify(currentContent, null, 2) + "\n";
-    const encoded = base64Encode(newContent);
-
+    const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
     const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
       method: "PUT",
       body: {
@@ -66,27 +72,24 @@ $("#addBtn").addEventListener("click", async () => {
       },
     });
     if (put.status !== 200 && put.status !== 201) {
-      throw new Error(`Kunne ikke commite (${put.status}): ${put.data?.message || "ukjent feil"}`);
+      throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
     }
-
     $("#newUrl").value = "";
-    setStatus("Lagt til. Trigg workflow manuelt hvis du vil ha den beriket nå — ellers skjer det ved neste 07:00-kjøring.", false);
+    showStatus("Lagt til. Detaljer hentes ved neste kjøring (07:00) — eller trigg workflowen manuelt på GitHub.", false);
     await loadBoats();
   } catch (err) {
-    setStatus("Feil: " + err.message, true);
+    showStatus("Feil: " + err.message, true);
   } finally {
     $("#addBtn").disabled = false;
   }
-});
+}
 
-$("#newUrl").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") $("#addBtn").click();
-});
-
-function setStatus(msg, isError) {
+function showStatus(msg, isError) {
   const el = $("#addStatus");
   el.textContent = msg;
-  el.className = "add-status" + (isError ? " error" : " ok");
+  el.className = "add-status" + (isError ? " error" : "");
+  el.hidden = false;
+  if (!isError) setTimeout(() => { el.hidden = true; }, 8000);
 }
 
 async function ghFetch(path, opts = {}) {
@@ -106,11 +109,10 @@ async function ghFetch(path, opts = {}) {
 }
 
 function base64Encode(str) {
-  // UTF-8-safe base64
   return btoa(unescape(encodeURIComponent(str)));
 }
 
-/* ---------- Vis lista ---------- */
+/* ---------- Load & render ---------- */
 async function loadBoats() {
   $("#loading").textContent = "Laster…";
   $("#loading").style.display = "";
@@ -122,14 +124,13 @@ async function loadBoats() {
     $("#loading").style.display = "none";
     render();
   } catch (err) {
-    $("#loading").textContent = "Klarte ikke laste boats.json: " + err.message;
+    $("#loading").textContent = "Kunne ikke laste boats.json: " + err.message;
   }
 }
 
-function fmtPrice(n, cur) {
+function fmtPriceValue(n) {
   if (n == null) return "—";
-  try { return new Intl.NumberFormat("nb-NO").format(n) + " " + (cur || ""); }
-  catch { return String(n); }
+  try { return new Intl.NumberFormat("nb-NO").format(n); } catch { return String(n); }
 }
 function fmtDate(iso) {
   if (!iso) return "—";
@@ -147,6 +148,11 @@ function daysAgo(iso) {
   return diff + " dager siden";
 }
 function esc(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function hostname(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ""); }
+  catch { return url; }
+}
 
 function filtered() {
   const q = $("#search").value.trim().toLowerCase();
@@ -172,55 +178,80 @@ function cmp(a, b) { if (a === b) return 0; if (a == null) return 1; if (b == nu
 
 function render() {
   const list = filtered();
-  const grid = $("#grid");
-  grid.innerHTML = "";
+  const container = $("#listings");
+  container.innerHTML = "";
 
-  const stats = [];
-  stats.push(`<span><b>${boats.length}</b> båter</span>`);
-  stats.push(`<span><b>${boats.filter(b => b.status === "active").length}</b> aktive</span>`);
-  stats.push(`<span><b>${boats.filter(b => b.status === "sold").length}</b> solgte</span>`);
-  const failing = boats.filter(b => b.parseFailed).length;
-  if (failing) stats.push(`<span style="color:#ffb454"><b>${failing}</b> feilet ved henting</span>`);
-  $("#stats").innerHTML = stats.join("");
+  $("#countText").textContent = `${boats.length} båt${boats.length === 1 ? "" : "er"}`;
 
   if (list.length === 0) {
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1;">Ingen båter matcher filtrene.</div>`;
+    container.innerHTML = `<div class="empty">
+      <div style="font-size:32px; margin-bottom:8px;">⛵</div>
+      <div style="font-size:16px; color: var(--text); font-weight:600; margin-bottom:4px;">Ingen båter ennå</div>
+      <div>Lim inn en annonse-URL øverst for å komme i gang.</div>
+    </div>`;
     return;
   }
 
-  for (const b of list) grid.appendChild(cardEl(b));
+  for (const b of list) container.appendChild(cardEl(b));
 }
 
 function cardEl(b) {
   const el = document.createElement("div");
   el.className = "card" + (b.status === "sold" ? " sold" : "");
+
   const status = b.status || "ukjent";
+  const statusLabel = {
+    active: "Aktiv", sold: "Solgt", reserved: "Reservert",
+    removed: "Fjernet", unknown: "Venter", ukjent: "Venter",
+  }[status] || status;
 
-  const badges = [];
-  badges.push(`<span class="badge ${status}">${status}</span>`);
-  if (b.parseFailed) badges.push(`<span class="badge failed">feilet</span>`);
+  const priceChanged = b.prevPrice && b.prevPrice !== b.price;
+  const currency = b.currency || "";
 
-  const history = (b.history || []).slice(-3).reverse().map(h => {
+  const kicker = hostname(b.url || "");
+
+  const meta = [];
+  if (b.adLastUpdated) meta.push({ k: "Annonse oppdatert", v: fmtDate(b.adLastUpdated) });
+  if (b.lastCheckedAt) meta.push({ k: "Sist sjekket", v: daysAgo(b.lastCheckedAt) });
+
+  const history = (b.history || []).slice(-2).reverse().map(h => {
     let text = "";
     if (h.type === "added") text = "Lagt til";
-    else if (h.type === "price") text = `Pris: ${fmtPrice(h.from, b.currency)} → ${fmtPrice(h.to, b.currency)}`;
+    else if (h.type === "price") text = `Pris: ${fmtPriceValue(h.from)} → ${fmtPriceValue(h.to)} ${currency}`;
     else if (h.type === "status") text = `Status: ${h.from} → ${h.to}`;
     else text = h.type;
-    return `<div class="row"><span>${esc(text)}</span><span>${daysAgo(h.at)}</span></div>`;
+    return `<div class="h-row"><span>${esc(text)}</span><span>${daysAgo(h.at)}</span></div>`;
   }).join("");
 
+  const imageHtml = b.image
+    ? `<img src="${esc(b.image)}" alt="" loading="lazy" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin','<div class=&quot;placeholder&quot;>⛵</div>');" />`
+    : `<div class="placeholder">⛵</div>`;
+
+  const statusBadgeClass = b.parseFailed ? "failed" : status;
+  const statusBadgeText = b.parseFailed ? "Kunne ikke lese" : statusLabel;
+
   el.innerHTML = `
-    <div class="badges">${badges.join("")}</div>
-    <div class="title">${esc(b.title || "(ingen tittel — venter på første sjekk)")}</div>
-    <div class="price">${fmtPrice(b.price, b.currency)}</div>
-    <div class="meta">
-      ${b.adLastUpdated ? `<span>Annonse oppdatert: ${esc(fmtDate(b.adLastUpdated))}</span>` : ""}
-      ${b.lastChangeAt ? `<span>Sist endring hos oss: ${daysAgo(b.lastChangeAt)}</span>` : ""}
-      ${b.lastCheckedAt ? `<span>Sist sjekket: ${daysAgo(b.lastCheckedAt)}</span>` : ""}
+    <div class="card-image">
+      ${imageHtml}
+      <div class="status-badge ${statusBadgeClass}">${esc(statusBadgeText)}</div>
     </div>
-    <a class="link" href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.url)}</a>
-    ${history ? `<div class="history">${history}</div>` : ""}
-    ${b.lastError ? `<div class="meta" style="color:#ffb454;">Feil: ${esc(b.lastError)}</div>` : ""}
+    <div class="card-content">
+      <div class="card-kicker">${esc(kicker)}</div>
+      <h3 class="card-title">${esc(b.title || "(venter på første sjekk)")}</h3>
+      ${meta.length ? `<div class="card-meta">${meta.map(m => `<div><span class="meta-label">${m.k}:</span> ${esc(m.v)}</div>`).join("")}</div>` : ""}
+      ${history ? `<div class="card-history">${history}</div>` : ""}
+      ${b.lastError ? `<div class="card-error">${esc(b.lastError)}</div>` : ""}
+      <div class="card-url">${esc(b.url || "")}</div>
+    </div>
+    <div class="card-price">
+      <div class="price-value${priceChanged ? " changed" : ""}">${fmtPriceValue(b.price)} <span class="price-currency">${esc(currency)}</span></div>
+      ${priceChanged ? `<div class="price-old">Var: ${fmtPriceValue(b.prevPrice)} ${esc(currency)}</div>` : ""}
+      <div class="price-detail">
+        ${b.addedAt ? `<div class="row"><span class="k">Lagt til</span><span>${daysAgo(b.addedAt)}</span></div>` : ""}
+        ${b.lastChangeAt ? `<div class="row"><span class="k">Sist endring</span><span>${daysAgo(b.lastChangeAt)}</span></div>` : ""}
+      </div>
+      <div class="cta"><a href="${esc(b.url)}" target="_blank" rel="noopener">Åpne annonsen</a></div>
+    </div>
   `;
   return el;
 }
@@ -228,6 +259,5 @@ function cardEl(b) {
 $("#search").addEventListener("input", render);
 $("#statusFilter").addEventListener("change", render);
 $("#sort").addEventListener("change", render);
-$("#reload").addEventListener("click", loadBoats);
 
 loadBoats();
