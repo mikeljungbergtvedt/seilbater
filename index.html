@@ -12,7 +12,7 @@
   <div class="topbar-inner">
     <div class="logo">⛵ <span>Seilbåter</span></div>
     <div class="add-inline">
-      <input id="newUrl" type="url" placeholder="Lim inn URL fra annonse (Finn, Yachtworld, Boat24…)" />
+      <input id="newUrl" type="url" placeholder="Lim inn URL fra annonse (Finn, Yachtworld, Boat24…)" autocomplete="off" />
       <button id="addBtn" class="btn-primary">Legg til</button>
     </div>
   </div>
@@ -24,7 +24,7 @@
   <div class="listing-header">
     <div class="listing-count"><span id="countText">0 båter</span></div>
     <div class="controls">
-      <input id="search" type="search" placeholder="Søk…" />
+      <input id="search" type="search" placeholder="Søk…" value="" autocomplete="off" />
       <select id="statusFilter">
         <option value="all">Alle statuser</option>
         <option value="active">Aktive</option>
@@ -53,7 +53,7 @@
     <h2>Én engangs-oppsett</h2>
     <p>For at siden skal kunne legge til båter automatisk trenger den et GitHub personal access token. Lagres <b>kun i din nettleser</b> — sendes aldri noe annet sted enn til GitHub selv.</p>
     <p class="small">Bruk <code>seilbater-push</code>-tokenet som ble opprettet ved oppsettet. Mistet det? <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">Lag et nytt her</a> — Contents: Read and write på repoet <code>seilbater</code>.</p>
-    <input id="patInput" type="password" placeholder="github_pat_…" />
+    <input id="patInput" type="password" placeholder="github_pat_…" autocomplete="new-password" spellcheck="false" />
     <div class="modal-actions">
       <button id="patCancel" class="btn-ghost">Avbryt</button>
       <button id="patSave" class="btn-primary">Lagre</button>
