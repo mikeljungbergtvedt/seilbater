@@ -1,5 +1,10 @@
 {
   "boats": [
-    { "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/" }
+    {
+      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
+    },
+    {
+      "url": "https://batagent.se/batar/hallberg-rassy-43-lidkoping-2007/"
+    }
   ]
 }
