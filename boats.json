@@ -1,10 +1,5 @@
 {
   "boats": [
-    {
-      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
-    },
-    {
-      "url": "https://www.finn.no/mobility/item/470774623"
-    }
+    { "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/" }
   ]
 }
