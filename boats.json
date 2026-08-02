@@ -28,33 +28,6 @@
       "status": "active"
     },
     {
-      "url": "https://www.finn.no/mobility/item/471722940",
-      "id": "b_q5xa10b9",
-      "addedAt": "2026-08-02T12:26:31.446Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:26:31.446Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Maxi Fenix Dinett 711",
-      "currency": "NOK",
-      "adLastUpdated": "2026-08-02T00:00:00.000Z",
-      "image": "https://images.finncdn.no/dynamic/default/item/471722940/8f68cfb6-0bae-4c7f-be25-b4933a8c399a",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "opengraph",
-        "adLastUpdated": "heuristic"
-      },
-      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
-      "price": 125000,
-      "status": "active"
-    },
-    {
       "url": "https://www.finn.no/mobility/item/471733214",
       "id": "b_ro06zmac",
       "addedAt": "2026-08-02T12:30:50.080Z",
@@ -117,7 +90,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃÂÃÂ¶ Yachts 40 Classic",
+      "title": "MalÃÂÃÂÃÂÃÂ¶ Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
