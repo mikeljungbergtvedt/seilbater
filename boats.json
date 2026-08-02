@@ -11,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Malö Yachts Malø 39",
+      "title": "MalÃ¶ Yachts MalÃ¸ 39",
       "currency": "NOK",
       "adLastUpdated": "2026-03-30T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
@@ -40,6 +40,9 @@
       "parseFailed": true,
       "lastCheckedAt": "2026-08-02T11:53:05.476Z",
       "lastError": "HTTP 403"
+    },
+    {
+      "url": "https://www.finn.no/mobility/item/470774623"
     }
   ]
 }
