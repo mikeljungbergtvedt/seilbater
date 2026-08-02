@@ -11,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Malö Yachts 40 Classic",
+      "title": "MalÃ¶ Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
@@ -85,6 +85,9 @@
       "price": 500,
       "lastChangeAt": "2026-08-02T13:11:52.313Z",
       "status": "sold"
+    },
+    {
+      "url": "https://no.yachtworld.com/yacht/2004-hallberg--rassy-43-10243005/"
     }
   ],
   "_retriggerAt": "2026-08-02T12:54:16.027Z"
