@@ -2,47 +2,46 @@ name: Daily check
 
 on:
   schedule:
-      - cron: "0 5 * * *"
-        workflow_dispatch:
+    - cron: "0 5 * * *"   # 07:00 Oslo sommertid / 06:00 vinter
+  workflow_dispatch:
 
-        permissions:
-          contents: write
+permissions:
+  contents: write
 
-          concurrency:
-            group: daily-check
-              cancel-in-progress: false
+concurrency:
+  group: daily-check
+  cancel-in-progress: false
 
-              jobs:
-                check:
-                    runs-on: ubuntu-latest
-                        steps:
-                              - name: Checkout
-                                      uses: actions/checkout@v4
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-                                            - name: Setup Node
-                                                    uses: actions/setup-node@v4
-                                                            with:
-                                                                      node-version: "20"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-                                                                            - name: Install deps
-                                                                                    run: npm install --no-audit --no-fund
+      - name: Install deps
+        run: npm install --no-audit --no-fund
 
-                                                                                          - name: Run check
-                                                                                                  env:
-                                                                                                            MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-                                                                                                                      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-                                                                                                                                MAIL_TO: ${{ secrets.MAIL_TO }}
-                                                                                                                                        run: npm run check
-                                                                                                                                        
-                                                                                                                                              - name: Commit updated boats.json
-                                                                                                                                                      run: |
-                                                                                                                                                                if [[ -n "$(git status --porcelain boats.json)" ]]; then
-                                                                                                                                                                            git config user.name "github-actions[bot]"
-                                                                                                                                                                                        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                                                                                                                                                                                                    git add boats.json
-                                                                                                                                                                                                                git commit -m "chore: daily check $(date -u +%Y-%m-%d)"
-                                                                                                                                                                                                                            git push
-                                                                                                                                                                                                                                      else
-                                                                                                                                                                                                                                                  echo "Ingen endringer i boats.json"
-                                                                                                                                                                                                                                                            fi
-                                                                                                                                                                                                                                                            
+      - name: Run check
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: npm run check
+
+      - name: Commit updated boats.json
+        run: |
+          if [[ -n "$(git status --porcelain boats.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add boats.json
+            git commit -m "chore: daily check $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "Ingen endringer i boats.json"
+          fi
