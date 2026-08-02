@@ -11,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃ¶ Yachts 40 Classic",
+      "title": "Malö Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T13:10:26.135Z",
+      "lastCheckedAt": "2026-08-02T13:11:52.313Z",
       "price": 2950000,
       "status": "active"
     },
@@ -50,12 +50,41 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T13:10:26.135Z",
+      "lastCheckedAt": "2026-08-02T13:11:52.313Z",
       "price": 4000000,
       "status": "active"
     },
     {
-      "url": "https://no.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
+      "url": "https://no.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
+      "id": "b_nuerlnue",
+      "addedAt": "2026-08-02T13:11:52.313Z",
+      "history": [
+        {
+          "at": "2026-08-02T13:11:52.313Z",
+          "type": "added"
+        },
+        {
+          "at": "2026-08-02T13:11:52.313Z",
+          "type": "status",
+          "from": "unknown",
+          "to": "sold"
+        }
+      ],
+      "parseFailed": false,
+      "title": "1997 Hallberg-Rassy 39 Cruisere til salgs- YachtWorld",
+      "currency": "USD",
+      "image": "https://images.boatsgroup.com/resize/1/79/95/1997-hallberg-rassy-39-sail-10197995-20260528053336759-1.jpg",
+      "parseSources": {
+        "title": "opengraph",
+        "image": "opengraph",
+        "price": "heuristic",
+        "currency": "heuristic",
+        "status": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T13:11:52.313Z",
+      "price": 500,
+      "lastChangeAt": "2026-08-02T13:11:52.313Z",
+      "status": "sold"
     }
   ],
   "_retriggerAt": "2026-08-02T12:54:16.027Z"
