@@ -41,6 +41,36 @@ $("#patModal").addEventListener("click", (e) => {
 $("#addBtn").addEventListener("click", addBoat);
 $("#newUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") addBoat(); });
 
+async function deleteBoat(url) {
+  if (!confirm("Slette denne båten?")) return;
+  if (!requirePat()) return;
+  showStatus("Sletter…", false);
+  try {
+    const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
+    if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
+    const meta = current.data;
+    const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
+    const before = currentContent.boats.length;
+    currentContent.boats = (currentContent.boats || []).filter(b => (b.url || "").trim() !== url);
+    if (currentContent.boats.length === before) {
+      showStatus("Fant ikke båten i lista.", true);
+      return;
+    }
+    const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
+    const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+      method: "PUT",
+      body: { message: `Remove boat: ${url}`, content: encoded, sha: meta.sha, branch: "main" },
+    });
+    if (put.status !== 200 && put.status !== 201) {
+      throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
+    }
+    showStatus("Slettet.", false);
+    await loadBoats();
+  } catch (err) {
+    showStatus("Feil: " + err.message, true);
+  }
+}
+
 async function addBoat() {
   const url = $("#newUrl").value.trim();
   if (!url) return;
@@ -250,9 +280,14 @@ function cardEl(b) {
         ${b.addedAt ? `<div class="row"><span class="k">Lagt til</span><span>${daysAgo(b.addedAt)}</span></div>` : ""}
         ${b.lastChangeAt ? `<div class="row"><span class="k">Sist endring</span><span>${daysAgo(b.lastChangeAt)}</span></div>` : ""}
       </div>
-      <div class="cta"><a href="${esc(b.url)}" target="_blank" rel="noopener">Åpne annonsen</a></div>
+      <div class="cta">
+        <a href="${esc(b.url)}" target="_blank" rel="noopener">Åpne annonsen</a>
+        <button class="btn-delete" data-url="${esc(b.url)}">Slett</button>
+      </div>
     </div>
   `;
+  const delBtn = el.querySelector(".btn-delete");
+  if (delBtn) delBtn.addEventListener("click", (e) => { e.stopPropagation(); deleteBoat(b.url); });
   return el;
 }
 
