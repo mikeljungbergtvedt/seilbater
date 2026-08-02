@@ -42,14 +42,20 @@ $("#addBtn").addEventListener("click", addBoat);
 $("#newUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") addBoat(); });
 
 async function deleteBoat(url) {
+  console.log("[delete] click, url =", JSON.stringify(url));
+  console.log("[delete] boats i in-memory-lista (URLer):", boats.map(b => b.url));
+  const matchingIdx = boats.findIndex(b => (b.url || "").trim() === (url || "").trim());
+  console.log("[delete] match-index i in-memory:", matchingIdx);
+
   if (!confirm("Slette denne båten?")) return;
   if (!requirePat()) return;
 
-  // Optimistisk oppdatering: fjern fra in-memory og render UMIDDELBART
-  // så brukeren ser resultatet. Hvis commit feiler, ruller vi tilbake.
+  // Optimistisk oppdatering (bare hvis vi FANT båten in-memory — ellers venter vi på server-svar)
   const backupBoats = boats.slice();
-  boats = boats.filter(b => (b.url || "").trim() !== url);
-  render();
+  if (matchingIdx >= 0) {
+    boats = boats.filter((_, i) => i !== matchingIdx);
+    render();
+  }
   showStatus("Sletter…", false);
 
   try {
@@ -57,13 +63,19 @@ async function deleteBoat(url) {
     if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
     const meta = current.data;
     const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
+    const serverUrls = (currentContent.boats || []).map(b => b.url);
+    console.log("[delete] boats på serveren (URLer):", serverUrls);
     const before = currentContent.boats.length;
-    currentContent.boats = (currentContent.boats || []).filter(b => (b.url || "").trim() !== url);
+    currentContent.boats = (currentContent.boats || []).filter(b => (b.url || "").trim() !== (url || "").trim());
+    console.log("[delete] serverliste etter filter: før =", before, "etter =", currentContent.boats.length);
+
     if (currentContent.boats.length === before) {
-      // Var allerede borte — ingen commit nødvendig
-      showStatus("Slettet.", false);
+      // Fant ikke på server — enten allerede slettet, eller URL matcher ikke eksakt.
+      // Behold optimistisk UI-fjerning, ikke rull tilbake.
+      showStatus("URL fantes ikke på serveren — fjernet lokalt uansett.", false);
       return;
     }
+
     const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
     const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
       method: "PUT",
@@ -74,7 +86,7 @@ async function deleteBoat(url) {
     }
     showStatus("Slettet.", false);
   } catch (err) {
-    // Rollback UI
+    console.error("[delete] feil:", err);
     boats = backupBoats;
     render();
     showStatus("Feil ved sletting — rullet tilbake: " + err.message, true);
