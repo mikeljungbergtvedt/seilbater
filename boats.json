@@ -28,20 +28,6 @@
       "status": "active"
     },
     {
-      "url": "https://www.boat24.com/en/sailingboats/hallberg-rassy/hallberg-rassy-hr-42f/detail/563838/",
-      "id": "b_zc2efsgt",
-      "addedAt": "2026-08-02T12:24:46.015Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:24:46.015Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": true,
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
-      "lastError": "HTTP 403"
-    },
-    {
       "url": "https://www.finn.no/mobility/item/471722940",
       "id": "b_q5xa10b9",
       "addedAt": "2026-08-02T12:26:31.446Z",
@@ -79,7 +65,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbÃÂÃÂ¥t 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbÃÂÃÂÃÂÃÂ¥t 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -104,7 +90,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfÃÂÃÂ¤llbar, till segelbÃÂÃÂ¥t",
+      "title": "Ratt, hopfÃÂÃÂÃÂÃÂ¤llbar, till segelbÃÂÃÂÃÂÃÂ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -156,7 +142,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃÂÃÂ¥t med Flysky FS-i6 sÃÂÃÂ¤",
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃÂÃÂÃÂÃÂ¥t med Flysky FS-i6 sÃÂÃÂÃÂÃÂ¤",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
