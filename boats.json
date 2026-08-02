@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 60000,
       "status": "active"
     },
@@ -50,7 +50,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 125000,
       "status": "active"
     },
@@ -65,7 +65,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -75,7 +75,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 20000,
       "status": "active"
     },
@@ -90,7 +90,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
+      "title": "Ratt, hopfällbar, till segelbåt",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -100,7 +100,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 1000,
       "status": "active"
     },
@@ -127,7 +127,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 175000,
       "status": "active"
     },
@@ -142,7 +142,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃ¥t med Flysky FS-i6 sÃ¤",
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbåt med Flysky FS-i6 sä",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
@@ -152,7 +152,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 3000,
       "status": "active"
     },
@@ -177,7 +177,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 179900,
       "status": "active"
     },
@@ -192,7 +192,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃ¶ Yachts 40 Classic",
+      "title": "Malö Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
@@ -204,12 +204,36 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
       "price": 2950000,
       "status": "active"
     },
     {
-      "url": "https://www.finn.no/mobility/item/125053947"
+      "url": "https://www.finn.no/mobility/item/125053947",
+      "id": "b_dn1d8tge",
+      "addedAt": "2026-08-02T12:58:27.085Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:58:27.085Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Hallberg Rassy 43 MK II",
+      "currency": "NOK",
+      "adLastUpdated": "2026-07-24T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/2018/8/vertical-4/10/7/125/053/947_968700654.jpg",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
+      "price": 4000000,
+      "status": "active"
     }
   ],
   "_retriggerAt": "2026-08-02T12:54:16.027Z"
