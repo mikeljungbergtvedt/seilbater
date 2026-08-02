@@ -11,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Malö Yachts Malø 39",
+      "title": "MalÃ¶ Yachts MalÃ¸ 39",
       "currency": "NOK",
       "adLastUpdated": "2026-03-30T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
@@ -26,6 +26,9 @@
       "lastCheckedAt": "2026-08-02T11:10:11.543Z",
       "price": 1450000,
       "status": "active"
+    },
+    {
+      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
     }
   ]
 }
