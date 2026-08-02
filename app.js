@@ -42,51 +42,29 @@ $("#addBtn").addEventListener("click", addBoat);
 $("#newUrl").addEventListener("keydown", (e) => { if (e.key === "Enter") addBoat(); });
 
 async function deleteBoat(url) {
-  console.log("[delete] click, url =", JSON.stringify(url));
-  console.log("[delete] boats i in-memory-lista (URLer):", boats.map(b => b.url));
-  const matchingIdx = boats.findIndex(b => (b.url || "").trim() === (url || "").trim());
-  console.log("[delete] match-index i in-memory:", matchingIdx);
-
+  const wanted = (url || "").trim();
   if (!confirm("Slette denne båten?")) return;
   if (!requirePat()) return;
 
-  // Optimistisk oppdatering (bare hvis vi FANT båten in-memory — ellers venter vi på server-svar)
+  // Optimistisk fjerning i UI
   const backupBoats = boats.slice();
-  if (matchingIdx >= 0) {
-    boats = boats.filter((_, i) => i !== matchingIdx);
-    render();
-  }
+  boats = boats.filter(b => (b.url || "").trim() !== wanted);
+  render();
   showStatus("Sletter…", false);
 
   try {
-    const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
-    if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
-    const meta = current.data;
-    const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
-    const serverUrls = (currentContent.boats || []).map(b => b.url);
-    console.log("[delete] boats på serveren (URLer):", serverUrls);
-    const before = currentContent.boats.length;
-    currentContent.boats = (currentContent.boats || []).filter(b => (b.url || "").trim() !== (url || "").trim());
-    console.log("[delete] serverliste etter filter: før =", before, "etter =", currentContent.boats.length);
-
-    if (currentContent.boats.length === before) {
-      // Fant ikke på server — enten allerede slettet, eller URL matcher ikke eksakt.
-      // Behold optimistisk UI-fjerning, ikke rull tilbake.
-      showStatus("URL fantes ikke på serveren — fjernet lokalt uansett.", false);
-      return;
-    }
-
-    const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
-    const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-      method: "PUT",
-      body: { message: `Remove boat: ${url}`, content: encoded, sha: meta.sha, branch: "main" },
-    });
-    if (put.status !== 200 && put.status !== 201) {
-      throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
-    }
-    showStatus("Slettet.", false);
+    const result = await mutateBoatsFile(
+      (content) => {
+        const before = (content.boats || []).length;
+        content.boats = (content.boats || []).filter(b => (b.url || "").trim() !== wanted);
+        if (content.boats.length === before) return null; // ikke på server, ingen commit
+        return content;
+      },
+      `Remove boat: ${wanted}`
+    );
+    if (result.noop) showStatus("Var allerede borte på serveren.", false);
+    else showStatus("Slettet.", false);
   } catch (err) {
-    console.error("[delete] feil:", err);
     boats = backupBoats;
     render();
     showStatus("Feil ved sletting — rullet tilbake: " + err.message, true);
@@ -99,47 +77,36 @@ async function addBoat() {
   try { new URL(url); } catch { showStatus("Ikke en gyldig URL.", true); return; }
   if (!requirePat()) return;
 
-  // Duplikat-sjekk i in-memory først
   if (boats.some(b => (b.url || "").trim() === url)) {
     showStatus("Denne URL-en er allerede lagt til.", true);
     return;
   }
 
-  // Optimistisk placeholder — vis kortet UMIDDELBART så brukeren ser at
-  // båten er lagt til (ikke må vente på commit + workflow).
+  // Optimistisk placeholder
   const now = new Date().toISOString();
   const placeholder = { url, addedAt: now, history: [{ at: now, type: "added" }], _pending: true };
-  const backupBoats = boats.slice();
   boats = [placeholder, ...boats];
   $("#newUrl").value = "";
   render();
-  showStatus("Lagt til. Henter detaljer (~1–2 min)…", false);
+  showStatus("Lagrer…", false);
   $("#addBtn").disabled = true;
 
   try {
-    const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
-    if (current.status !== 200) throw new Error(`Kunne ikke lese boats.json (${current.status})`);
-    const meta = current.data;
-    const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
-    if (!currentContent.boats) currentContent.boats = [];
-    if (currentContent.boats.some(b => (b.url || "").trim() === url)) {
-      // Allerede på serveren (race condition) — greit, la placeholder stå
-      return;
-    }
-    currentContent.boats.push({ url });
-    const encoded = base64Encode(JSON.stringify(currentContent, null, 2) + "\n");
-    const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-      method: "PUT",
-      body: { message: `Add boat: ${url}`, content: encoded, sha: meta.sha, branch: "main" },
-    });
-    if (put.status !== 200 && put.status !== 201) {
-      throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
-    }
-    // Planlegg re-fetch etter workflow har rukket å berike (~90 sek)
+    const result = await mutateBoatsFile(
+      (content) => {
+        if (!content.boats) content.boats = [];
+        if (content.boats.some(b => (b.url || "").trim() === url)) return null; // allerede der
+        content.boats.push({ url });
+        return content;
+      },
+      `Add boat: ${url}`
+    );
+    if (result.noop) showStatus("Var allerede på serveren.", false);
+    else showStatus("Lagt til. Henter detaljer (~1–2 min)…", false);
     setTimeout(() => { loadBoats(); }, 90000);
   } catch (err) {
-    // Rollback UI
-    boats = backupBoats;
+    // Rollback: fjern placeholder
+    boats = boats.filter(b => !(b._pending && b.url === url));
     render();
     showStatus("Feil ved lagring — rullet tilbake: " + err.message, true);
   } finally {
@@ -173,6 +140,55 @@ async function ghFetch(path, opts = {}) {
 
 function base64Encode(str) {
   return btoa(unescape(encodeURIComponent(str)));
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+/* ---------- Save queue + mutex + retry-on-409 ----------
+ * Racing rask-etterhverandre-writes triggerer 409 fra Contents API fordi
+ * hver skriver referer en gammel sha. Vi løser det med:
+ *   (1) Mutex: én commit om gangen (promise-chain-kø)
+ *   (2) Retry-on-conflict: ved 409 hent fersk sha + reapply mutator
+ * mutator(content) → nyContent | null (null = no-op, ikke committ)
+ */
+let _saveQueue = Promise.resolve();
+function _enqueue(fn) {
+  const next = _saveQueue.then(fn, fn);
+  _saveQueue = next.catch(() => {}); // ikke la feil blokkere neste
+  return next;
+}
+
+async function mutateBoatsFile(mutator, commitMessage, maxAttempts = 4) {
+  return _enqueue(async () => {
+    let lastErr;
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const current = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`);
+      if (current.status !== 200) {
+        throw new Error(`Kunne ikke lese boats.json (${current.status})`);
+      }
+      const meta = current.data;
+      const currentContent = JSON.parse(atob(meta.content.replace(/\n/g, "")));
+      const newContent = await mutator(currentContent);
+      if (newContent == null) return { noop: true }; // mutator sa "ingenting å gjøre"
+
+      const encoded = base64Encode(JSON.stringify(newContent, null, 2) + "\n");
+      const put = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+        method: "PUT",
+        body: { message: commitMessage, content: encoded, sha: meta.sha, branch: "main" },
+      });
+      if (put.status === 200 || put.status === 201) return { ok: true, content: newContent };
+
+      if (put.status === 409 || put.status === 422) {
+        // sha-konflikt (annen writer commit'et først) — hent fersk sha og prøv igjen
+        console.warn(`[mutate] ${put.status} conflict på attempt ${attempt + 1}, retry`);
+        lastErr = new Error(`sha conflict (${put.status})`);
+        await sleep(200 + attempt * 400 + Math.random() * 200);
+        continue;
+      }
+      throw new Error(`Commit feilet (${put.status}): ${put.data?.message || "ukjent"}`);
+    }
+    throw lastErr || new Error("Ga opp etter flere forsøk");
+  });
 }
 
 /* ---------- Load & render ---------- */
