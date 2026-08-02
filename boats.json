@@ -67,7 +67,7 @@
         }
       ],
       "parseFailed": true,
-      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -93,7 +93,7 @@
         }
       ],
       "parseFailed": true,
-      "title": "Ratt, hopfällbar, till segelbåt",
+      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -147,7 +147,7 @@
         }
       ],
       "parseFailed": true,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbåt med Flysky FS-i6 sä",
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃ¥t med Flysky FS-i6 sÃ¤",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
@@ -186,6 +186,9 @@
       "lastCheckedAt": "2026-08-02T12:43:38.714Z",
       "price": 179900,
       "status": "active"
+    },
+    {
+      "url": "https://www.finn.no/mobility/item/463140024"
     }
   ]
 }
