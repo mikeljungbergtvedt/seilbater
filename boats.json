@@ -1,33 +1,6 @@
 {
   "boats": [
     {
-      "url": "https://www.finn.no/mobility/item/470774623",
-      "id": "b_l768wqe6",
-      "addedAt": "2026-08-02T11:05:53.426Z",
-      "history": [
-        {
-          "at": "2026-08-02T11:05:53.426Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Bavaria Vision",
-      "currency": "NOK",
-      "adLastUpdated": "2026-07-29T00:00:00.000Z",
-      "image": "https://images.finncdn.no/dynamic/default/item/470774623/1a7ee70f-ca14-46b6-9a33-f6694903b04e",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "opengraph",
-        "adLastUpdated": "heuristic"
-      },
-      "lastCheckedAt": "2026-08-02T11:09:15.821Z",
-      "price": 1370000,
-      "status": "active"
-    },
-    {
       "url": "https://www.finn.no/mobility/item/427955891",
       "id": "b_3473dr3e",
       "addedAt": "2026-08-02T11:05:53.426Z",
@@ -38,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Malö Yachts Malø 39",
+      "title": "MalÃ¶ Yachts MalÃ¸ 39",
       "currency": "NOK",
       "adLastUpdated": "2026-03-30T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
