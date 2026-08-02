@@ -55,31 +55,6 @@
       "status": "active"
     },
     {
-      "url": "https://www.blocket.se/recommerce/forsale/item/25323452",
-      "id": "b_v70mp6g5",
-      "addedAt": "2026-08-02T12:26:31.446Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:26:31.446Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Ratt, hopfÃÂ¤llbar, till segelbÃÂ¥t",
-      "currency": "SEK",
-      "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "jsonld"
-      },
-      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
-      "price": 1000,
-      "status": "active"
-    },
-    {
       "url": "https://www.finn.no/mobility/item/471733214",
       "id": "b_ro06zmac",
       "addedAt": "2026-08-02T12:30:50.080Z",
@@ -142,7 +117,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃÂ¶ Yachts 40 Classic",
+      "title": "MalÃÂÃÂ¶ Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
