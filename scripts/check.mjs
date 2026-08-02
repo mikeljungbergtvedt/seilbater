@@ -248,6 +248,25 @@ function toNumber(v) {
   return Math.round(n);
 }
 
+/* ---------------- Interstitial detection ---------------- */
+// Cloudflare / bot-beskyttelse-sider har typiske tekster i tittelen.
+// Vi vil ikke lagre disse som annonse-tittel eller "berike" båten med dem.
+function isInterstitial(html, extractedTitle) {
+  const t = (extractedTitle || "").toLowerCase();
+  const patterns = [
+    "one moment, please", "just a moment", "checking your browser",
+    "please wait", "verifying you are human", "attention required",
+    "cloudflare", "access denied", "captcha", "security check",
+    "verify you are human", "ddos-guard", "ddos protection",
+  ];
+  if (patterns.some(p => t.includes(p))) return true;
+  // Sjekk også body-tekst hvis tittel er tom eller uspesifikk
+  const bodySample = html.slice(0, 5000).toLowerCase();
+  if (bodySample.includes("checking if the site connection is secure")) return true;
+  if (bodySample.includes("cf-browser-verification")) return true;
+  return false;
+}
+
 /* ---------------- Extract pipeline ---------------- */
 function extract(html) {
   const $ = cheerio.load(html);
@@ -336,6 +355,17 @@ async function main() {
     }
 
     const { data, parseSources } = extract(fetched.html);
+
+    // Avvis interstitial-sider (Cloudflare "One moment, please…" o.l.).
+    // Uten dette lagres bot-beskyttelses-tittelen som båtens tittel.
+    if (isInterstitial(fetched.html, data.title)) {
+      boat.parseFailed = true;
+      boat.lastCheckedAt = now;
+      boat.lastError = "bot-beskyttelse (interstitial) — kan ikke lese ekte annonse";
+      await sleep(RATE_MS);
+      continue;
+    }
+
     if (data.price == null && data.status == null && !data.title) {
       boat.parseFailed = true;
       boat.lastCheckedAt = now;
