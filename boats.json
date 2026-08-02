@@ -23,12 +23,23 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:18:52.075Z",
+      "lastCheckedAt": "2026-08-02T12:24:46.015Z",
       "price": 60000,
       "status": "active"
     },
     {
-      "url": "https://www.boat24.com/en/sailingboats/hallberg-rassy/hallberg-rassy-hr-42f/detail/563838/"
+      "url": "https://www.boat24.com/en/sailingboats/hallberg-rassy/hallberg-rassy-hr-42f/detail/563838/",
+      "id": "b_zc2efsgt",
+      "addedAt": "2026-08-02T12:24:46.015Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:24:46.015Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T12:24:46.015Z",
+      "lastError": "HTTP 403"
     }
   ]
 }
