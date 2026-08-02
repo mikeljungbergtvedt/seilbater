@@ -82,6 +82,12 @@ function walkJsonLd(node, out) {
     (Array.isArray(t) && t.includes("Vehicle"));
   if (isProduct) {
     if (!out.title && typeof node.name === "string") out.title = node.name.trim();
+    if (!out.image) {
+      const img = node.image;
+      if (typeof img === "string") out.image = img;
+      else if (Array.isArray(img) && img.length) out.image = typeof img[0] === "string" ? img[0] : img[0]?.url;
+      else if (img && typeof img === "object") out.image = img.url;
+    }
     const offers = Array.isArray(node.offers) ? node.offers[0] : node.offers;
     if (offers && typeof offers === "object") {
       if (out.price == null) {
@@ -121,6 +127,9 @@ function parseOpenGraph($) {
 
   const title = meta("og:title") || meta("og:title", "name");
   if (title) out.title = title.trim();
+
+  const image = meta("og:image") || meta("og:image:secure_url") || meta("twitter:image", "name");
+  if (image) out.image = image.trim();
 
   const priceRaw =
     meta("product:price:amount") ||
@@ -252,7 +261,7 @@ function extract(html) {
   ];
 
   for (const [source, data] of layers) {
-    for (const key of ["title", "price", "currency", "status", "adLastUpdated"]) {
+    for (const key of ["title", "price", "currency", "status", "adLastUpdated", "image"]) {
       if (acc[key] == null && data[key] != null && data[key] !== "") {
         acc[key] = data[key];
         parseSources[key] = source;
@@ -351,6 +360,7 @@ async function main() {
     if (data.title) boat.title = data.title;
     if (data.currency) boat.currency = data.currency;
     if (data.adLastUpdated) boat.adLastUpdated = data.adLastUpdated;
+    if (data.image) boat.image = data.image;
     boat.parseSources = parseSources;
     boat.lastCheckedAt = now;
 
