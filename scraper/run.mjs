@@ -150,9 +150,9 @@ function parseHeuristic($, rawHtml) {
   const t = $("title").first().text();
   if (t) out.title = t.trim();
   const bodyText = $("body").text().replace(/\s+/g, " ").trim();
-  const lower = bodyText.toLowerCase();
-  if (/\b(sold|solgt|no longer available|annonse fjernet)\b/.test(lower)) out.status = "sold";
-  else if (/\b(reserved|reservert|sale pending|pending sale|under bud)\b/.test(lower)) out.status = "reserved";
+  // MERK: ikke lenger sette status fra heuristikk — for aggressive false
+  // positives (Yachtworld har "Recently Sold"-seksjoner osv). Bare JSON-LD
+  // og OpenGraph får sette status.
   const patterns = [
     /(?:us\$|\$|€|£)\s*([\d][\d\s.,]{2,})/i,
     /([\d][\d\s.,]{2,})\s*(kr|nok|usd|eur|gbp|sek|dkk|\$|€|£)/i,
