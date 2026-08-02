@@ -40,6 +40,9 @@
       "parseFailed": true,
       "lastCheckedAt": "2026-08-02T12:24:46.015Z",
       "lastError": "HTTP 403"
+    },
+    {
+      "url": "https://www.finn.no/mobility/item/471722940"
     }
   ]
 }
