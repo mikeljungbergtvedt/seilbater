@@ -4,36 +4,34 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Seilbåter</title>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
-<header>
-  <h1>⛵ Seilbåter</h1>
-  <div class="sub">Overvåkning av annonser — daglig oppdatert</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">⛵ <span>Seilbåter</span></div>
+    <div class="add-inline">
+      <input id="newUrl" type="url" placeholder="Lim inn URL fra annonse (Finn, Yachtworld, Boat24…)" />
+      <button id="addBtn" class="btn-primary">Legg til</button>
+    </div>
+  </div>
 </header>
 
-<main>
-  <section class="add-section">
-    <label for="newUrl">Legg til annonse</label>
-    <div class="add-row">
-      <input id="newUrl" type="url" placeholder="Lim inn URL fra Finn, Yachtworld, Boat24…" />
-      <button id="addBtn" class="primary">Legg til</button>
-    </div>
-    <div id="addStatus" class="add-status"></div>
-  </section>
+<main class="container">
+  <div id="addStatus" class="add-status" hidden></div>
 
-  <div class="controls">
-    <input id="search" type="search" placeholder="Søk i tittel eller URL…" />
-    <label>Status
+  <div class="listing-header">
+    <div class="listing-count"><span id="countText">0 båter</span></div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Søk…" />
       <select id="statusFilter">
-        <option value="all">Alle</option>
+        <option value="all">Alle statuser</option>
         <option value="active">Aktive</option>
         <option value="sold">Solgte</option>
         <option value="reserved">Reserverte</option>
         <option value="removed">Fjernet</option>
       </select>
-    </label>
-    <label>Sorter
       <select id="sort">
         <option value="lastChangeAt-desc">Sist endret</option>
         <option value="addedAt-desc">Nyest lagt til</option>
@@ -42,12 +40,10 @@
         <option value="price-desc">Pris: høy → lav</option>
         <option value="title-asc">Tittel A → Å</option>
       </select>
-    </label>
-    <button id="reload">Oppfrisk</button>
+    </div>
   </div>
 
-  <div id="stats" class="stats"></div>
-  <div id="grid" class="grid"></div>
+  <div id="listings" class="listings"></div>
   <div id="loading" class="empty">Laster…</div>
 </main>
 
@@ -55,19 +51,16 @@
 <div id="patModal" class="modal-backdrop">
   <div class="modal">
     <h2>Én engangs-oppsett</h2>
-    <p>For at siden skal kunne legge til båter automatisk trenger den et GitHub personal access token som lagres <b>kun i din nettleser</b> (localStorage). Det sendes aldri noe annet sted enn til GitHub selv, direkte fra din maskin.</p>
-    <p>Bruk samme <code>seilbater-push</code>-token som ble opprettet ved oppsettet. Hvis du mistet det: lag et nytt <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">her</a> — Contents: Read and write på repoet <code>seilbater</code>.</p>
+    <p>For at siden skal kunne legge til båter automatisk trenger den et GitHub personal access token. Lagres <b>kun i din nettleser</b> — sendes aldri noe annet sted enn til GitHub selv.</p>
+    <p class="small">Bruk <code>seilbater-push</code>-tokenet som ble opprettet ved oppsettet. Mistet det? <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">Lag et nytt her</a> — Contents: Read and write på repoet <code>seilbater</code>.</p>
     <input id="patInput" type="password" placeholder="github_pat_…" />
     <div class="modal-actions">
-      <button id="patSave" class="primary">Lagre</button>
+      <button id="patCancel" class="btn-ghost">Avbryt</button>
+      <button id="patSave" class="btn-primary">Lagre</button>
     </div>
   </div>
 </div>
 
-<footer>
-  Tokenet lagres kun lokalt i denne nettleseren. For å nullstille — åpne konsollen og kjør <code>localStorage.removeItem('gh_pat')</code>.
-</footer>
-
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
