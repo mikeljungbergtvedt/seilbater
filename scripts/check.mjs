@@ -311,13 +311,10 @@ async function main() {
       fetched = await fetchHtml(boat.url);
     } catch (err) {
       log(" -> fetch feilet:", err.message);
-      const wasFailing = boat.parseFailed === true;
       boat.parseFailed = true;
       boat.lastCheckedAt = now;
       boat.lastError = err.message;
-      if (!wasFailing) {
-        events.push({ kind: "failed", boat, reason: err.message });
-      }
+      // No email — bruker ba spesifikt om KUN pris/status-endringer
       await sleep(RATE_MS);
       continue;
     }
@@ -340,19 +337,14 @@ async function main() {
 
     const { data, parseSources } = extract(fetched.html);
     if (data.price == null && data.status == null && !data.title) {
-      const wasFailing = boat.parseFailed === true;
       boat.parseFailed = true;
       boat.lastCheckedAt = now;
       boat.lastError = "kunne ikke lese pris/status/tittel";
-      if (!wasFailing) events.push({ kind: "failed", boat, reason: "kunne ikke lese siden" });
+      // No email
       await sleep(RATE_MS);
       continue;
     }
 
-    // Recovered from previous failure
-    if (boat.parseFailed) {
-      events.push({ kind: "recovered", boat });
-    }
     boat.parseFailed = false;
     delete boat.lastError;
 
@@ -364,13 +356,11 @@ async function main() {
     boat.parseSources = parseSources;
     boat.lastCheckedAt = now;
 
-    // Detect price change
+    // Detect price change (only mail on ACTUAL change — not on first seed)
     if (data.price != null) {
       if (boat.price == null) {
         boat.price = data.price;
-        if (isNew) {
-          events.push({ kind: "seeded", boat });
-        }
+        // First-time seed: don't mail
       } else if (data.price !== boat.price) {
         events.push({
           kind: "price",
