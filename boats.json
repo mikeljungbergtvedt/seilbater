@@ -1,5 +1,18 @@
 {
   "boats": [
-    { "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/" }
+    {
+      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
+      "id": "b_tcj6ymue",
+      "addedAt": "2026-08-02T09:56:36.018Z",
+      "history": [
+        {
+          "at": "2026-08-02T09:56:36.018Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T09:56:36.018Z",
+      "lastError": "HTTP 403"
+    }
   ]
 }
