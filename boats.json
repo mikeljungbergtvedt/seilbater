@@ -11,7 +11,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃ¶ Yachts 40 Classic",
+      "title": "Malö Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T13:07:01.076Z",
+      "lastCheckedAt": "2026-08-02T13:10:26.135Z",
       "price": 2950000,
       "status": "active"
     },
@@ -50,7 +50,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T13:07:01.076Z",
+      "lastCheckedAt": "2026-08-02T13:10:26.135Z",
       "price": 4000000,
       "status": "active"
     }
