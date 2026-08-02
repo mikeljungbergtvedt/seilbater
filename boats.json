@@ -1,33 +1,6 @@
 {
   "boats": [
     {
-      "url": "https://www.finn.no/mobility/item/427955891",
-      "id": "b_3473dr3e",
-      "addedAt": "2026-08-02T11:05:53.426Z",
-      "history": [
-        {
-          "at": "2026-08-02T11:05:53.426Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Malö Yachts Malø 39",
-      "currency": "NOK",
-      "adLastUpdated": "2026-03-30T00:00:00.000Z",
-      "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "opengraph",
-        "adLastUpdated": "heuristic"
-      },
-      "lastCheckedAt": "2026-08-02T12:01:57.658Z",
-      "price": 1450000,
-      "status": "active"
-    },
-    {
       "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
       "id": "b_pa8nw75h",
       "addedAt": "2026-08-02T11:53:05.476Z",
