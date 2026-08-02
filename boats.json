@@ -65,7 +65,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -90,7 +90,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfällbar, till segelbåt",
+      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -132,31 +132,6 @@
       "status": "active"
     },
     {
-      "url": "https://www.blocket.se/recommerce/forsale/item/25325639",
-      "id": "b_zrznkfbh",
-      "addedAt": "2026-08-02T12:30:50.080Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:30:50.080Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbåt med Flysky FS-i6 sä",
-      "currency": "SEK",
-      "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "jsonld"
-      },
-      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
-      "price": 3000,
-      "status": "active"
-    },
-    {
       "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
       "id": "b_qrj1vsuf",
       "addedAt": "2026-08-02T12:43:38.714Z",
@@ -192,7 +167,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Malö Yachts 40 Classic",
+      "title": "MalÃ¶ Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
