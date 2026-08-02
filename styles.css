@@ -69,3 +69,34 @@ button:hover { background: #263749; }
 .history .row { display: flex; justify-content: space-between; padding: 2px 0; gap: 8px; }
 
 .empty { text-align: center; padding: 40px 20px; color: var(--muted); border: 2px dashed var(--border); border-radius: 12px; }
+
+/* Add-section (paste URL) */
+.add-section {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 18px;
+}
+.add-section > label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.add-row { display: flex; gap: 8px; }
+.add-row input { flex: 1; }
+button.primary { background: var(--accent); color: #0b1522; border-color: transparent; font-weight: 600; cursor: pointer; }
+button.primary:hover { background: #64b1ff; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.add-status { margin-top: 8px; font-size: 13px; min-height: 18px; color: var(--muted); }
+.add-status.ok { color: var(--accent-2); }
+.add-status.error { color: var(--danger); }
+
+/* PAT modal */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none;
+  align-items: center; justify-content: center; z-index: 100; padding: 20px;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px; width: 100%; max-width: 480px; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+}
+.modal h2 { margin: 0 0 12px; font-size: 18px; }
+.modal p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0 0 10px; }
+.modal p code, .modal p a { color: var(--accent); }
+.modal input { margin-top: 8px; }
+.modal-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
