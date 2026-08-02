@@ -79,7 +79,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbÃÂ¥t 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbÃÂÃÂ¥t 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -104,7 +104,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfÃÂ¤llbar, till segelbÃÂ¥t",
+      "title": "Ratt, hopfÃÂÃÂ¤llbar, till segelbÃÂÃÂ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -117,20 +117,6 @@
       "lastCheckedAt": "2026-08-02T12:31:36.276Z",
       "price": 1000,
       "status": "active"
-    },
-    {
-      "url": "https://www.yachtworld.com/yacht/2010-hanse-545-10063102/",
-      "id": "b_yv5qm337",
-      "addedAt": "2026-08-02T12:26:31.446Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:26:31.446Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": true,
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
-      "lastError": "HTTP 403"
     },
     {
       "url": "https://www.finn.no/mobility/item/471733214",
@@ -170,7 +156,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃÂ¥t med Flysky FS-i6 sÃÂ¤",
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃÂÃÂ¥t med Flysky FS-i6 sÃÂÃÂ¤",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
