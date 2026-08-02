@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 5 * * *"   # 07:00 Oslo sommertid / 06:00 vinter
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["boats.json"]
 
 permissions:
   contents: write
