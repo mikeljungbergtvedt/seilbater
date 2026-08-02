@@ -146,8 +146,15 @@ function base64Encode(str) {
 async function loadBoats() {
   $("#loading").textContent = "Laster…";
   $("#loading").style.display = "";
+  // Sørg for at søkefeltet er tomt ved load — hvis nettleseren har autofilt
+  // med noe fra history, blir ellers listen filtrert ned til nesten ingenting.
+  $("#search").value = "";
   try {
-    const res = await fetch("boats.json?" + Date.now());
+    // Hent fra raw.githubusercontent for å slippe GitHub Pages CDN-cache
+    // (Pages kan trenge 1 min å redeploy etter en commit). raw. reflekterer
+    // main-branchen umiddelbart etter et API-commit.
+    const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/boats.json?t=${Date.now()}`;
+    const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
     boats = data.boats || [];
