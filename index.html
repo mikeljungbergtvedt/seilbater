@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seilbåter</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>⛵ Seilbåter</h1>
+  <div class="sub">Overvåkning av annonser — daglig oppdatert</div>
+</header>
+
+<main>
+  <div class="controls">
+    <input id="search" type="search" placeholder="Søk i tittel eller URL…" />
+    <label>Status
+      <select id="statusFilter">
+        <option value="all">Alle</option>
+        <option value="active">Aktive</option>
+        <option value="sold">Solgte</option>
+        <option value="reserved">Reserverte</option>
+        <option value="removed">Fjernet</option>
+      </select>
+    </label>
+    <label>Sorter
+      <select id="sort">
+        <option value="lastChangeAt-desc">Sist endret</option>
+        <option value="addedAt-desc">Nyest lagt til</option>
+        <option value="addedAt-asc">Eldst lagt til</option>
+        <option value="price-asc">Pris: lav → høy</option>
+        <option value="price-desc">Pris: høy → lav</option>
+        <option value="title-asc">Tittel A → Å</option>
+      </select>
+    </label>
+    <button id="reload">Oppfrisk</button>
+  </div>
+
+  <div id="stats" class="stats"></div>
+  <div id="grid" class="grid"></div>
+  <div id="loading" class="empty">Laster…</div>
+</main>
+
+<footer>
+  For å legge til en båt: rediger <code>boats.json</code> i GitHub-webbet og legg til <code>{"url": "https://…"}</code> i <code>boats</code>-arrayet.
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
