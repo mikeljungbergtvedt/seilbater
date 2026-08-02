@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "lastCheckedAt": "2026-08-02T11:07:36.688Z",
       "price": 1370000,
       "status": "active"
     },
@@ -38,17 +38,13 @@
         }
       ],
       "parseFailed": false,
-      "title": "Hallberg-Rassy Hallberg-Rassy 43",
+      "title": "One moment, please...",
       "currency": "SEK",
       "image": "https://batagent.se/wp-content/uploads/2026/07/P1045953-scaled.jpg",
       "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "jsonld"
+        "title": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "lastCheckedAt": "2026-08-02T11:07:36.688Z",
       "price": 4150000,
       "status": "active"
     },
@@ -63,7 +59,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃ¶ Yachts MalÃ¸ 39",
+      "title": "Malö Yachts Malø 39",
       "currency": "NOK",
       "adLastUpdated": "2026-03-30T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
@@ -75,7 +71,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "lastCheckedAt": "2026-08-02T11:07:36.688Z",
       "price": 1450000,
       "status": "active"
     }
