@@ -26,7 +26,7 @@ function uid() { return "b_" + Math.random().toString(36).slice(2, 10); }
  * fetch. Vi bruker ekte Chromium med stealth-tuning for å bestå
  * bot-sjekken.
  */
-const BROWSER_DOMAINS = /yachtworld\.com|boat24\.com|boattrader\.com/i;
+const BROWSER_DOMAINS = /yachtworld\.com|boat24\.com|boattrader\.com|finn\.no|blocket\.se|batagent\.se/i;
 
 let _browser = null;
 async function getBrowser() {
