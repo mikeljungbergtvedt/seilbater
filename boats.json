@@ -10,7 +10,7 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
+      "parseFailed": false,
       "title": "Jeanneau fANTASIA 27",
       "currency": "NOK",
       "adLastUpdated": "2026-07-31T00:00:00.000Z",
@@ -23,10 +23,9 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 60000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.finn.no/mobility/item/471722940",
@@ -38,7 +37,7 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
+      "parseFailed": false,
       "title": "Maxi Fenix Dinett 711",
       "currency": "NOK",
       "adLastUpdated": "2026-08-02T00:00:00.000Z",
@@ -51,10 +50,9 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 125000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.blocket.se/recommerce/forsale/item/25297294",
@@ -66,8 +64,8 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
-      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
+      "parseFailed": false,
+      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -77,10 +75,9 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 20000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.blocket.se/recommerce/forsale/item/25323452",
@@ -92,8 +89,8 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
-      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
+      "parseFailed": false,
+      "title": "Ratt, hopfällbar, till segelbåt",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -103,10 +100,9 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 1000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.finn.no/mobility/item/471733214",
@@ -118,7 +114,7 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
+      "parseFailed": false,
       "title": "Beneteau First 30E",
       "currency": "NOK",
       "adLastUpdated": "2026-08-02T00:00:00.000Z",
@@ -131,10 +127,9 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 175000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.blocket.se/recommerce/forsale/item/25325639",
@@ -146,8 +141,8 @@
           "type": "added"
         }
       ],
-      "parseFailed": true,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃ¥t med Flysky FS-i6 sÃ¤",
+      "parseFailed": false,
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbåt med Flysky FS-i6 sä",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
@@ -157,10 +152,9 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 3000,
-      "status": "active",
-      "lastError": "HTTP 403"
+      "status": "active"
     },
     {
       "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
@@ -183,12 +177,36 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:43:38.714Z",
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
       "price": 179900,
       "status": "active"
     },
     {
-      "url": "https://www.finn.no/mobility/item/463140024"
+      "url": "https://www.finn.no/mobility/item/463140024",
+      "id": "b_sd3xpwwz",
+      "addedAt": "2026-08-02T12:55:01.426Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:55:01.426Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Malö Yachts 40 Classic",
+      "currency": "NOK",
+      "adLastUpdated": "2026-07-18T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T12:55:01.426Z",
+      "price": 2950000,
+      "status": "active"
     }
   ],
   "_retriggerAt": "2026-08-02T12:54:16.027Z"
