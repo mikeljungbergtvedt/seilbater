@@ -161,6 +161,13 @@ html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
   font-size: 13px; font-weight: 600; text-decoration: none; transition: all .12s;
 }
 .card-price .cta a:hover { background: var(--accent); color: #fff; }
+.card-price .cta { display: flex; flex-direction: column; gap: 6px; }
+.btn-delete {
+  padding: 6px 12px; background: transparent; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 8px; font-size: 12px;
+  cursor: pointer; font-family: inherit;
+}
+.btn-delete:hover { background: #fef2f2; color: var(--danger); border-color: #fecaca; }
 
 /* ---------- Empty state ---------- */
 .empty {
