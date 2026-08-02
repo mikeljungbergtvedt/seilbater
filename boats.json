@@ -1,16 +1,97 @@
 {
   "boats": [
     {
-      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
+      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
+      "id": "b_ehg3gzce",
+      "addedAt": "2026-08-02T11:05:53.426Z",
+      "history": [
+        {
+          "at": "2026-08-02T11:05:53.426Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "lastError": "HTTP 403"
     },
     {
-      "url": "https://www.finn.no/mobility/item/470774623"
+      "url": "https://www.finn.no/mobility/item/470774623",
+      "id": "b_l768wqe6",
+      "addedAt": "2026-08-02T11:05:53.426Z",
+      "history": [
+        {
+          "at": "2026-08-02T11:05:53.426Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Bavaria Vision",
+      "currency": "NOK",
+      "adLastUpdated": "2026-07-29T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/470774623/1a7ee70f-ca14-46b6-9a33-f6694903b04e",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "price": 1370000,
+      "status": "active"
     },
     {
-      "url": "https://batagent.se/batar/hallberg-rassy-43-lidkoping-2007/"
+      "url": "https://batagent.se/batar/hallberg-rassy-43-lidkoping-2007/",
+      "id": "b_eceh5p1k",
+      "addedAt": "2026-08-02T11:05:53.426Z",
+      "history": [
+        {
+          "at": "2026-08-02T11:05:53.426Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Hallberg-Rassy Hallberg-Rassy 43",
+      "currency": "SEK",
+      "image": "https://batagent.se/wp-content/uploads/2026/07/P1045953-scaled.jpg",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "jsonld"
+      },
+      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "price": 4150000,
+      "status": "active"
     },
     {
-      "url": "https://www.finn.no/mobility/item/427955891"
+      "url": "https://www.finn.no/mobility/item/427955891",
+      "id": "b_3473dr3e",
+      "addedAt": "2026-08-02T11:05:53.426Z",
+      "history": [
+        {
+          "at": "2026-08-02T11:05:53.426Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Malö Yachts Malø 39",
+      "currency": "NOK",
+      "adLastUpdated": "2026-03-30T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T11:05:53.426Z",
+      "price": 1450000,
+      "status": "active"
     }
   ]
 }
