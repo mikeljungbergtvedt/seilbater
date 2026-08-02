@@ -13,6 +13,15 @@
 </header>
 
 <main>
+  <section class="add-section">
+    <label for="newUrl">Legg til annonse</label>
+    <div class="add-row">
+      <input id="newUrl" type="url" placeholder="Lim inn URL fra Finn, Yachtworld, Boat24…" />
+      <button id="addBtn" class="primary">Legg til</button>
+    </div>
+    <div id="addStatus" class="add-status"></div>
+  </section>
+
   <div class="controls">
     <input id="search" type="search" placeholder="Søk i tittel eller URL…" />
     <label>Status
@@ -42,8 +51,21 @@
   <div id="loading" class="empty">Laster…</div>
 </main>
 
+<!-- PAT-prompt-modal -->
+<div id="patModal" class="modal-backdrop">
+  <div class="modal">
+    <h2>Én engangs-oppsett</h2>
+    <p>For at siden skal kunne legge til båter automatisk trenger den et GitHub personal access token som lagres <b>kun i din nettleser</b> (localStorage). Det sendes aldri noe annet sted enn til GitHub selv, direkte fra din maskin.</p>
+    <p>Bruk samme <code>seilbater-push</code>-token som ble opprettet ved oppsettet. Hvis du mistet det: lag et nytt <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">her</a> — Contents: Read and write på repoet <code>seilbater</code>.</p>
+    <input id="patInput" type="password" placeholder="github_pat_…" />
+    <div class="modal-actions">
+      <button id="patSave" class="primary">Lagre</button>
+    </div>
+  </div>
+</div>
+
 <footer>
-  For å legge til en båt: rediger <code>boats.json</code> i GitHub-webbet og legg til <code>{"url": "https://…"}</code> i <code>boats</code>-arrayet.
+  Tokenet lagres kun lokalt i denne nettleseren. For å nullstille — åpne konsollen og kjør <code>localStorage.removeItem('gh_pat')</code>.
 </footer>
 
 <script src="app.js"></script>
