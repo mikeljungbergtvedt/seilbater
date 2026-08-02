@@ -11,11 +11,35 @@
         }
       ],
       "parseFailed": true,
-      "lastCheckedAt": "2026-08-02T12:12:28.371Z",
+      "lastCheckedAt": "2026-08-02T12:18:52.075Z",
       "lastError": "HTTP 403"
     },
     {
-      "url": "https://www.finn.no/mobility/item/471246508"
+      "url": "https://www.finn.no/mobility/item/471246508",
+      "id": "b_paihubk5",
+      "addedAt": "2026-08-02T12:18:52.075Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:18:52.075Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Jeanneau fANTASIA 27",
+      "currency": "NOK",
+      "adLastUpdated": "2026-07-31T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/471246508/3057d092-1501-4921-9479-bf405394c27e",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T12:18:52.075Z",
+      "price": 60000,
+      "status": "active"
     }
   ]
 }
