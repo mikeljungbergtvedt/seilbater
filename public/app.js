@@ -65,10 +65,7 @@ async function addBoat() {
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     boats = (data.boats || []).map(normalizeBoat);
     render();
-    const added = boats.find(b => b.url === url);
-    if (added?.parseFailed) showStatus("Lagt til, men klarte ikke lese annonsen: " + (added.lastError || ""), true);
-    else if (added && !added.title) showStatus("Lagt til. Detaljer hentes av lokal scraper innen ~15 min.", false);
-    else if (added) showStatus("Lagt til.", false);
+    showStatus("Lagt til. Detaljer hentes innen ~15 min.", false);
   } catch (err) {
     boats = backup; render();
     showStatus("Feil: " + err.message, true);
