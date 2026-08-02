@@ -1,13 +1,70 @@
 {
   "boats": [
     {
-      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/"
+      "url": "https://www.yachtworld.com/yacht/1997-hallberg--rassy-39-10197995/",
+      "id": "b_l2mnhy0n",
+      "addedAt": "2026-08-02T10:55:01.813Z",
+      "history": [
+        {
+          "at": "2026-08-02T10:55:01.813Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T10:55:01.813Z",
+      "lastError": "HTTP 403"
     },
     {
-      "url": "https://batagent.se/batar/hallberg-rassy-43-lidkoping-2007/"
+      "url": "https://batagent.se/batar/hallberg-rassy-43-lidkoping-2007/",
+      "id": "b_tyuk1t8h",
+      "addedAt": "2026-08-02T10:55:01.813Z",
+      "history": [
+        {
+          "at": "2026-08-02T10:55:01.813Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Hallberg-Rassy Hallberg-Rassy 43",
+      "currency": "SEK",
+      "image": "https://batagent.se/wp-content/uploads/2026/07/P1045953-scaled.jpg",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "jsonld"
+      },
+      "lastCheckedAt": "2026-08-02T10:55:01.813Z",
+      "price": 4150000,
+      "status": "active"
     },
     {
-      "url": "https://www.finn.no/mobility/item/427955891"
+      "url": "https://www.finn.no/mobility/item/427955891",
+      "id": "b_wm5xu9uj",
+      "addedAt": "2026-08-02T10:55:01.813Z",
+      "history": [
+        {
+          "at": "2026-08-02T10:55:01.813Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": false,
+      "title": "Malö Yachts Malø 39",
+      "currency": "NOK",
+      "adLastUpdated": "2026-03-30T00:00:00.000Z",
+      "image": "https://images.finncdn.no/dynamic/default/item/427955891/0a12ac62-36f2-4a0b-800b-34991b577234",
+      "parseSources": {
+        "title": "jsonld",
+        "price": "jsonld",
+        "currency": "jsonld",
+        "status": "jsonld",
+        "image": "opengraph",
+        "adLastUpdated": "heuristic"
+      },
+      "lastCheckedAt": "2026-08-02T10:55:01.813Z",
+      "price": 1450000,
+      "status": "active"
     }
   ]
 }
