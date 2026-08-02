@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fetch } from "undici";
 import * as cheerio from "cheerio";
 import nodemailer from "nodemailer";
+import { chromium } from "playwright";
 
 const BOATS_FILE = new URL("../boats.json", import.meta.url);
 const UA =
@@ -19,6 +20,66 @@ function log(...args) { console.log("[check]", ...args); }
 function nowIso() { return new Date().toISOString(); }
 function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 function uid() { return "b_" + Math.random().toString(36).slice(2, 10); }
+
+/* ---------------- Playwright (for bot-protected sites) ----------------
+ * Yachtworld, Boat24 og andre sider bak Cloudflare blokkerer vanlig
+ * fetch. Vi bruker ekte Chromium med stealth-tuning for å bestå
+ * bot-sjekken.
+ */
+const BROWSER_DOMAINS = /yachtworld\.com|boat24\.com|boattrader\.com/i;
+
+let _browser = null;
+async function getBrowser() {
+  if (_browser && _browser.isConnected()) return _browser;
+  _browser = await chromium.launch({
+    headless: true,
+    args: [
+      "--disable-blink-features=AutomationControlled",
+      "--disable-features=IsolateOrigins,site-per-process",
+      "--no-sandbox",
+    ],
+  });
+  return _browser;
+}
+
+async function fetchHtmlWithBrowser(url) {
+  const browser = await getBrowser();
+  const context = await browser.newContext({
+    userAgent: UA,
+    viewport: { width: 1440, height: 900 },
+    locale: "en-US",
+    timezoneId: "America/New_York",
+    javaScriptEnabled: true,
+    extraHTTPHeaders: {
+      "Accept-Language": "en-US,en;q=0.9",
+    },
+  });
+  // Skjul automation-indikatorer som Cloudflare sjekker
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, "webdriver", { get: () => undefined });
+    Object.defineProperty(navigator, "plugins", { get: () => [1, 2, 3, 4, 5] });
+    Object.defineProperty(navigator, "languages", { get: () => ["en-US", "en"] });
+    window.chrome = { runtime: {} };
+  });
+  const page = await context.newPage();
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    // Vent på at Cloudflare challenge evt løses opp
+    await page.waitForTimeout(4000);
+    // Vent til hoved-innhold er der, ikke bare challenge-page
+    try {
+      await page.waitForFunction(
+        () => !document.title.toLowerCase().includes("just a moment") &&
+              !document.title.toLowerCase().includes("one moment"),
+        { timeout: 10000 }
+      );
+    } catch { /* fortsatt challenge — vi tar det vi har */ }
+    const html = await page.content();
+    return { status: 200, html };
+  } finally {
+    await context.close();
+  }
+}
 
 /* ---------------- Fetch ---------------- */
 async function fetchHtml(url) {
@@ -324,10 +385,13 @@ async function main() {
     if (!boat.history) boat.history = [{ at: now, type: "added" }];
     const isNew = boat.price == null && boat.status == null;
 
-    log("Sjekker", boat.url);
+    const useBrowser = BROWSER_DOMAINS.test(boat.url);
+    log("Sjekker", boat.url, useBrowser ? "[browser]" : "");
     let fetched;
     try {
-      fetched = await fetchHtml(boat.url);
+      fetched = useBrowser
+        ? await fetchHtmlWithBrowser(boat.url)
+        : await fetchHtml(boat.url);
     } catch (err) {
       log(" -> fetch feilet:", err.message);
       boat.parseFailed = true;
@@ -530,7 +594,11 @@ function escapeHtml(s) {
 }
 function escapeAttr(s) { return escapeHtml(s); }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main()
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    if (_browser) { try { await _browser.close(); } catch {} }
+  });
