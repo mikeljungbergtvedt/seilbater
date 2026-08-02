@@ -17,15 +17,20 @@ export default async function handler(req, res) {
 
       // Insert (or return existing)
       const inserted = await insertBoat(url);
-      // Scrape immediately
+      // Scrape immediately — men hopp over stille for domener som
+      // vi vet at lokal scraper håndterer (yachtworld osv).
       try {
         const data = await scrapeUrl(url);
         await updateBoatFromScrape(url, data);
       } catch (err) {
-        console.error("[scrape]", url, err.message);
-        await markBoatFailed(url, err.message);
-      } finally {
-        // Keep browser alive for warm reuse; close via cron finalize
+        if (err.message === "PENDING_LOCAL") {
+          // Bevisst hoppet over — lokal scraper henter innen 15 min.
+          // Ikke marker som failed; la parseFailed være false.
+          console.log("[scrape]", url, "— pending local scraper");
+        } else {
+          console.error("[scrape]", url, err.message);
+          await markBoatFailed(url, err.message);
+        }
       }
 
       const boats = await listBoats();
