@@ -23,7 +23,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 60000,
       "status": "active"
     },
@@ -50,7 +50,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 125000,
       "status": "active"
     },
@@ -65,7 +65,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbÃÂÃÂÃÂÃÂ¥t 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -75,7 +75,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 20000,
       "status": "active"
     },
@@ -90,7 +90,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfÃÂÃÂÃÂÃÂ¤llbar, till segelbÃÂÃÂÃÂÃÂ¥t",
+      "title": "Ratt, hopfällbar, till segelbåt",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -100,7 +100,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 1000,
       "status": "active"
     },
@@ -127,7 +127,7 @@
         "image": "opengraph",
         "adLastUpdated": "heuristic"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 175000,
       "status": "active"
     },
@@ -142,7 +142,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Joysway Dragon Force 65 - radiostyrd segelbÃÂÃÂÃÂÃÂ¥t med Flysky FS-i6 sÃÂÃÂÃÂÃÂ¤",
+      "title": "Joysway Dragon Force 65 - radiostyrd segelbåt med Flysky FS-i6 sä",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25325639/f239e17d-58fe-4098-84b3-26b30577d118",
       "parseSources": {
@@ -152,7 +152,7 @@
         "status": "jsonld",
         "image": "jsonld"
       },
-      "lastCheckedAt": "2026-08-02T12:31:36.276Z",
+      "lastCheckedAt": "2026-08-02T12:42:03.173Z",
       "price": 3000,
       "status": "active"
     }
