@@ -55,31 +55,6 @@
       "status": "active"
     },
     {
-      "url": "https://www.blocket.se/recommerce/forsale/item/25297294",
-      "id": "b_n3m18v5n",
-      "addedAt": "2026-08-02T12:26:31.446Z",
-      "history": [
-        {
-          "at": "2026-08-02T12:26:31.446Z",
-          "type": "added"
-        }
-      ],
-      "parseFailed": false,
-      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
-      "currency": "SEK",
-      "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
-      "parseSources": {
-        "title": "jsonld",
-        "price": "jsonld",
-        "currency": "jsonld",
-        "status": "jsonld",
-        "image": "jsonld"
-      },
-      "lastCheckedAt": "2026-08-02T12:58:27.085Z",
-      "price": 20000,
-      "status": "active"
-    },
-    {
       "url": "https://www.blocket.se/recommerce/forsale/item/25323452",
       "id": "b_v70mp6g5",
       "addedAt": "2026-08-02T12:26:31.446Z",
@@ -90,7 +65,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
+      "title": "Ratt, hopfÃÂ¤llbar, till segelbÃÂ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -167,7 +142,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "MalÃ¶ Yachts 40 Classic",
+      "title": "MalÃÂ¶ Yachts 40 Classic",
       "currency": "NOK",
       "adLastUpdated": "2026-07-18T00:00:00.000Z",
       "image": "https://images.finncdn.no/dynamic/default/item/463140024/6520bfb3-aaca-4e8a-af43-5692a7afb4ed",
