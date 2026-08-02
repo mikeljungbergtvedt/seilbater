@@ -79,7 +79,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Askeladden segelbåt 14 fot, Mercury 4hk kort rigg",
+      "title": "Askeladden segelbÃ¥t 14 fot, Mercury 4hk kort rigg",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25297294/465f8e92-8d8a-458e-a330-382395617d0f",
       "parseSources": {
@@ -104,7 +104,7 @@
         }
       ],
       "parseFailed": false,
-      "title": "Ratt, hopfällbar, till segelbåt",
+      "title": "Ratt, hopfÃ¤llbar, till segelbÃ¥t",
       "currency": "SEK",
       "image": "https://images.blocketcdn.se/dynamic/1280w/item/25323452/230f031f-5a39-4fd3-93a6-225b50d20a04",
       "parseSources": {
@@ -131,6 +131,9 @@
       "parseFailed": true,
       "lastCheckedAt": "2026-08-02T12:26:31.446Z",
       "lastError": "HTTP 403"
+    },
+    {
+      "url": "https://www.finn.no/mobility/item/471733214"
     }
   ]
 }
