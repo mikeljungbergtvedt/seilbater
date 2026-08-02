@@ -1,7 +1,18 @@
 {
   "boats": [
     {
-      "url": "https://www.boat24.com/en/sailingboats/hallberg-rassy/hallberg-rassy-hr-42f/detail/563838/"
+      "url": "https://www.boat24.com/en/sailingboats/hallberg-rassy/hallberg-rassy-hr-42f/detail/563838/",
+      "id": "b_w94krsk3",
+      "addedAt": "2026-08-02T12:12:28.371Z",
+      "history": [
+        {
+          "at": "2026-08-02T12:12:28.371Z",
+          "type": "added"
+        }
+      ],
+      "parseFailed": true,
+      "lastCheckedAt": "2026-08-02T12:12:28.371Z",
+      "lastError": "HTTP 403"
     }
   ]
 }
